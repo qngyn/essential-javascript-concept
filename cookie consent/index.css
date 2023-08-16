@@ -63,8 +63,9 @@ main{
 }
 
 /* modal */
-  
-.modal {
+
+.modal { 
+    display: none;
     position: fixed;
     top: 0;
     bottom: 0;
@@ -125,6 +126,7 @@ main{
 .modal-btn{
     padding: 10px 24px;
     cursor: pointer;
+
 }
 
 /* modal input */
