@@ -1,7 +1,13 @@
-/*
-Challenge: 
-1. Take the hard-coded HTML for the Wizard card, bring it 
-   into index.js and then inject it back into its div with 
-   JavaScript.
-2. Do the same for Orc card. 
-*/
+import {characterData} from './characterData'
+import Character from './character'
+
+
+function render(data) {
+   for (let character of data) {
+      const characterElement = new Character(character)
+      document.getElementById(characterElement.elementId).innerHTML = characterElement.getCharacterHtml()
+   }
+}
+
+render(characterData)
+
