@@ -6,12 +6,11 @@ function attack() {
    orc.getDiceHtml()
    wizard.takeDamage(orc.currentDiceScore)
    orc.takeDamage(wizard.currentDiceScore)
+   render()
 
-   if(wizard.dead || orc.dead){
+   if(wizard.isDeath || orc.isDeath){
        endGame()
-   } else {
-      render()
-   }    
+   }        
 }
 
 function endGame() {
