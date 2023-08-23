@@ -1,28 +1,37 @@
-import { getDiceRollArray } from './utils';
+import { getDiceRollArray, getDicePlaceholderHtml } from './utils';
+
 export default function Character(data) {
     Object.assign(this, data)
- 
+    this.diceArray = getDicePlaceholderHtml(this.diceCount)
+    
+
     this.getCharacterHtml = function () {
-        const { name, avatar, health, diceCount } = this;
-        const diceHtml = this.getDiceHtml(diceCount)
+        const { name, avatar, health, diceCount, diceArray } = this;
+        // const diceHtml = this.getDiceHtml(diceCount)
         const htmlInfo =
             `<div class="character-card">
             <h4 class="name"> ${name} </h4>
             <img class="avatar" src="${avatar}" />
             <div class="health">health: <b> ${health} </b></div>
             <div class="dice-container">    
-                ${diceHtml}
+                ${diceArray}
             </div>
         </div>`;
  
         return htmlInfo;
  
     }
+
+    this.takeDamage = function(attackScoreArray) {
+        const totalAttackScore = attackScoreArray.reduce((total, num) => total + num)
+        this.health = this.health - totalAttackScore >= 0 ? this.health - totalAttackScore : 0
+        this.isDeath = this.health > 0 ? true : false
+        console.log(this.isDeath)
+}
  
     this.getDiceHtml = function(diceCount) {
-       return getDiceRollArray(diceCount).map(function(num){ 
-          return  `<div class="dice">${num}</div>`
-      }).join('')
+        this.currentDiceScore = getDiceRollArray(this.diceCount)
+        this.diceArray = this.currentDiceScore.map((num)=> 
+            `<div class="dice">${num}</div>`).join("")
     }
- 
  }
